@@ -1,0 +1,75 @@
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h2>Game controls</h2>
+    <div class="row">
+      <div class="col">
+        <p class="lead">Welcome to Shakespeare Schwarzenegger</p>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+          <p>To start a new game, click on the "Start Game" button</p>
+      </div>
+      <div class="col">
+          <button type="button" class="btn btn-primary btn-lg" [hidden]="gameService.gameInProgress" (click)="startGame()">Start Game</button>
+
+      </div>
+      <div class="col">
+          <button type="button" class="btn btn-primary btn-lg" [hidden]="!gameService.gameInProgress" (click)="stopGame()">Stop Game</button>
+
+      </div>
+    </div>
+
+
+
+  </div>
+  <br>
+  <div class="game-progress" *ngIf="gameService.gameInProgress">
+    <div class="card">
+      <div class="card-body" *ngIf="gameService.gameInProgress">
+        <p>Game is in progress, start new rounds with the button below.</p>
+        <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Round duration</span>
+        </div>
+        <input type="number" width="5" [(ngModel)]="duration" class="form-control">
+      </div>
+        <br>
+        <button type="button" class="btn btn-primary btn-lg" [disabled]="gameService.roundsInProgress"  (click)="startRound()">Start Rounds</button>
+      </div>
+      <div class="card-body" *ngIf="1==2">
+          <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+          <div class="card-body">
+            <h5 class="card-title">Round in progress, who is responsible for the following Quote?</h5>
+            <h6 class="card-text">&ldquo;All the world's a stage, and all the men and women only players&rdquo;</h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>A.</b> Arnold Schwarzenegger</li>
+              <li class="list-group-item"><b>B.</b> William Shakespear</li>
+              <li class="list-group-item"><b>C.</b> Alexander Hamilton</li>
+            </ul>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{width : ( progressVal + '%' ) }"  attr.aria-valuenow="{{progressVal}}"  aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-body" *ngIf="roundComplete">
+        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+        <div class="card-body">
+          <h5 class="card-title">Round complete</h5>
+          <h6 class="card-text">Thanks for your participation, we'll now select a winner</h6>
+          <button type="button" class="btn btn-primary btn-lg" (click)="selectWinner()">Select winner</button>
+        </div>
+      </div>
+    </div>
+    <div class="subFooter" >
+        <button type="button" class="btn btn-primary btn-lg" (click)="nextPage()">Next</button>
+    </div>
+
+
+
+</main><!-- /.container -->
