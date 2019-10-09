@@ -13,7 +13,7 @@ export class GameService {
   quote = '';
   entries = 0;
   round = 0;
-  baseUrl = 'http://gateway-demojam.apps.tke-8ed9.open.redhat.com:8080';
+  baseUrl = 'http://gateway-demojam.apps.tke-8ed9.open.redhat.com';
   constructor(private http: HttpClient) {}
 
   startGame() {
