@@ -13,7 +13,7 @@ export class GameService {
   quote = '';
   entries = 0;
   round = 0;
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://gateway:8080';
   constructor(private http: HttpClient) {}
 
   startGame() {
