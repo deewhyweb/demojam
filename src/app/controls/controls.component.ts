@@ -26,7 +26,7 @@ export class ControlsComponent implements OnInit {
   }
 
   stopGame() {
-    console.log('Game started');
+
     this.gameService.stopGame();
     this.gameInProgress = false;
 

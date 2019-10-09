@@ -1,14 +1,17 @@
 import { Page1Component } from './page1/page1.component';
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class GameService {
+  private socket;
   gameInProgress = false;
   roundsInProgress = false;
   quote = '';
+  entries = 0;
   round = 0;
   baseUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) {}
@@ -26,25 +29,37 @@ export class GameService {
     this.roundsInProgress = false;
     this.round = 0;
     this.quote = '';
+    this.socket.disconnect();
   }
   startRounds(duration) {
     this.startRound();
+    this.connect();
     this.roundsInProgress = true;
     const interval = setInterval(() => {
-      if (this.gameInProgress){
-        this.startRound()
+      if (this.gameInProgress) {
+        this.startRound();
       } else {
-        clearInterval(interval)
+        clearInterval(interval);
       }
 
-    }, duration * 1000)
+    }, duration * 1000);
   }
 
-  startRound(){
+  startRound() {
     this.round++;
     this.http.get(this.baseUrl + '/games/rounds/start').subscribe((res: any) => {
       console.log(res.quote);
       this.quote = res.quote;
+    });
+  }
+  connect() {
+    this.socket = io('http://localhost:8080');
+    console.log('connected');
+
+    this.socket.on('message', data => {
+      console.log('Received message from Websocket Server');
+      console.log(data);
+      this.entries = data.entries;
     });
   }
 }

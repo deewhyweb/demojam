@@ -12,6 +12,7 @@ import { Page3Component } from './page3/page3.component';
 import { Page4Component } from './page4/page4.component';
 import { CoreSubComponent } from './core-sub/core-sub.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 
 const appRoutes: Routes = [
@@ -21,7 +22,9 @@ const appRoutes: Routes = [
   { path: 'page2', component: Page2Component },
   { path: 'page3', component: Page3Component },
   { path: 'page4', component: Page4Component },
-  { path: 'core-sub', component: CoreSubComponent }
+  { path: 'core-sub', component: CoreSubComponent },
+  { path: '', component: HomeComponent },
+
 ];
 
 @NgModule({
@@ -33,7 +36,8 @@ const appRoutes: Routes = [
     Page2Component,
     Page3Component,
     Page4Component,
-    CoreSubComponent
+    CoreSubComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
