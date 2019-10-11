@@ -37,3 +37,23 @@ body {
   max-width: 680px;
   padding: 0 15px;
 }
+
+.presentation {
+  background-color: #a30000;
+  border:#820000 2px solid;
+  padding:5px;
+  margin-left:10px;
+  color: white;
+}
+.presentation p {
+  font-size: 30px
+}
+.presentation li{
+
+  font-size: 30px
+}
+.pres-left {
+  float:left;
+  padding:10px;
+  width:600px
+}

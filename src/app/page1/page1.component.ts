@@ -14,7 +14,7 @@ export class Page1Component implements OnInit {
   }
 
   nextPage() {
-    this.router.navigate(['/core-sub']);
+    this.router.navigate(['/page2']);
   }
 
 }

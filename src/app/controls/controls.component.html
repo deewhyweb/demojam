@@ -1,21 +1,22 @@
 <main role="main" class="container">
 
   <div class="starter-template">
-    <h2>Game controls</h2>
-    <div class="row">
-      <div class="col">
-        <p class="lead">Welcome to Shakespeare Schwarzenegger</p>
 
+    <div class="row">
+      <div class="col" class="presentation">
+        <p class="lead"  style="color: white; font-size:40px ">Welcome to Shakespeare Schwarzenegger</p>
+        <p style="color: white; font-size:30px ">Purpose of the game?<br>To engage people in the room<br>
+            Built using impact mapping, coming work produced by Red Hat Open Innovation labs, change development paradigms</p>
+            <p>To start a new game, click on the "Start Game" button</p>
+            <div class="col">
+                <button type="button" class="btn btn-primary btn-lg" [hidden]="gameService.gameInProgress" (click)="startGame()">Start Game</button>
+
+            </div>
       </div>
     </div>
     <div class="row">
-      <div class="col">
-          <p>To start a new game, click on the "Start Game" button</p>
-      </div>
-      <div class="col">
-          <button type="button" class="btn btn-primary btn-lg" [hidden]="gameService.gameInProgress" (click)="startGame()">Start Game</button>
 
-      </div>
+
       <div class="col">
           <button type="button" class="btn btn-primary btn-lg" [hidden]="!gameService.gameInProgress" (click)="stopGame()">Stop Game</button>
 
