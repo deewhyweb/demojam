@@ -4,9 +4,14 @@
 
     <div class="row">
       <div class="col" class="presentation">
-        <p class="lead"  style="color: white; font-size:40px ">Welcome to Shakespeare Schwarzenegger</p>
-        <p style="color: white; font-size:30px ">Purpose of the game?<br>To engage people in the room<br>
-            Built using impact mapping, coming work produced by Red Hat Open Innovation labs, change development paradigms</p>
+        <p class="lead"  >Welcome to Shakespeare Schwarzenegger</p>
+        <!-- <p>Purpose of the game?<br>To engage people in the room<br>
+          <ul>
+            <li>Built using impact mapping</li>
+            <li>Coming work produced by Red Hat Open Innovation labs</li>
+            <li> Change development paradigms</li>
+          </ul> -->
+
             <p>To start a new game, click on the "Start Game" button</p>
             <div class="col">
                 <button type="button" class="btn btn-primary btn-lg" [hidden]="gameService.gameInProgress" (click)="startGame()">Start Game</button>
@@ -31,32 +36,11 @@
     <div class="card">
       <div class="card-body" *ngIf="gameService.gameInProgress">
         <p>Game is in progress, start new rounds with the button below.</p>
-        <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="">Round duration</span>
-        </div>
-        <input type="number" width="5" [(ngModel)]="duration" class="form-control">
-      </div>
+
         <br>
         <button type="button" class="btn btn-primary btn-lg" [disabled]="gameService.roundsInProgress"  (click)="startRound()">Start Rounds</button>
       </div>
-      <div class="card-body" *ngIf="1==2">
-          <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-          <div class="card-body">
-            <h5 class="card-title">Round in progress, who is responsible for the following Quote?</h5>
-            <h6 class="card-text">&ldquo;All the world's a stage, and all the men and women only players&rdquo;</h6>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><b>A.</b> Arnold Schwarzenegger</li>
-              <li class="list-group-item"><b>B.</b> William Shakespear</li>
-              <li class="list-group-item"><b>C.</b> Alexander Hamilton</li>
-            </ul>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" [ngStyle]="{width : ( progressVal + '%' ) }"  attr.aria-valuenow="{{progressVal}}"  aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-      </div>
+    </div>
 
       <div class="card-body" *ngIf="roundComplete">
         <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->

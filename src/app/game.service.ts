@@ -13,11 +13,13 @@ export class GameService {
   quote = '';
   entries = 0;
   round = 0;
-  baseUrl = 'http://gateway-demojam.apps.tke-8ed9.open.redhat.com';
+  latestEntry = "";
+  baseUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) {}
 
   startGame() {
-    this.http.get(this.baseUrl + '/games/start').subscribe(res => {
+    this.entries = 0;
+    this.http.get(this.baseUrl + '/api/game').subscribe(res => {
       console.log(res);
       this.gameInProgress = true;
 
@@ -47,7 +49,7 @@ export class GameService {
 
   startRound() {
     this.round++;
-    this.http.get(this.baseUrl + '/games/rounds/start').subscribe((res: any) => {
+    this.http.get(this.baseUrl + '/api/rounds').subscribe((res: any) => {
       console.log(res.quote);
       this.quote = res.quote;
     });
@@ -56,10 +58,16 @@ export class GameService {
     this.socket = io('http://localhost:8080');
     console.log('connected');
 
-    this.socket.on('message', data => {
+    this.socket.on('NEW_GUESS', data => {
       console.log('Received message from Websocket Server');
       console.log(data);
-      this.entries = data.entries;
+      this.entries++;
+      this.latestEntry = data;
     });
+    this.socket.on('NEW_QUOTE', data => {
+      console.log('Received message from Websocket Server');
+      this.quote = data;
+    });
+
   }
 }
