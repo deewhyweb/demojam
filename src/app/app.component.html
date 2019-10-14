@@ -44,9 +44,9 @@
       <router-outlet></router-outlet>
     </div>
     <div class="col-3" class="sidebar">
-      <div class="quote">
+      <div class="quote header">
         <h6>Open Twitter and follow the hashtag: <b>#QUARKUS</b></h6>
-        <h6>Respond to live tweets to with your guess to win cool prizes.</h6>
+        <h6>Respond to live tweets to win cool prizes.</h6>
       </div>
 
       <div  style="margin-top: 30px;">
@@ -67,7 +67,7 @@
         <h6 *ngIf="gameService.gameInProgress"><b>Current Quote:</b></h6>
       </div>
       <div class=" quote">
-        <h6 *ngIf="gameService.gameInProgress">{{ gameService.quote }}</h6>
+        <h6 *ngIf="gameService.gameInProgress && gameService.quote">"{{ gameService.quote }}"</h6>
       </div>
 
       <div class="">
