@@ -14,7 +14,7 @@ export class GameService {
   entries = 0;
   round = 0;
   latestEntry = "";
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://0.0.0.0:8080';
   constructor(private http: HttpClient) {}
 
   startGame() {
