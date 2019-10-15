@@ -14,7 +14,7 @@ export class GameService {
   entries = 0;
   round = 0;
   latestEntry = "";
-  baseUrl = 'http://0.0.0.0:8080';
+  baseUrl = 'http://localhost:8080';
   constructor(private http: HttpClient) {}
 
   startGame() {
@@ -37,14 +37,14 @@ export class GameService {
     this.startRound();
     this.connect();
     this.roundsInProgress = true;
-    const interval = setInterval(() => {
-      if (this.gameInProgress) {
-        this.startRound();
-      } else {
-        clearInterval(interval);
-      }
+    // const interval = setInterval(() => {
+    //   if (this.gameInProgress) {
+    //     this.startRound();
+    //   } else {
+    //     clearInterval(interval);
+    //   }
 
-    }, duration * 1000);
+    // }, duration * 1000);
   }
 
   startRound() {
@@ -55,7 +55,7 @@ export class GameService {
     });
   }
   connect() {
-    this.socket = io('http://localhost:8080');
+    this.socket = io(this.baseUrl + '/api/events');
     console.log('connected');
 
     this.socket.on('NEW_GUESS', data => {

@@ -13,6 +13,8 @@ import { Page4Component } from './page4/page4.component';
 import { CoreSubComponent } from './core-sub/core-sub.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 const appRoutes: Routes = [
@@ -38,12 +40,14 @@ const appRoutes: Routes = [
     Page4Component,
     CoreSubComponent,
     HomeComponent
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
