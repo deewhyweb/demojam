@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { GameService } from "../app/game.service";
 import { Router } from "@angular/router";
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
@@ -10,13 +10,29 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('clickBtn',  {static: true})
+  clickBtn: ElementRef;
+  winner: string;
+  subscription: any;
   constructor(public gameService: GameService, public router: Router, private modalService: NgbModal) {
     this.modalOptions = {
       backdrop:'static',
       backdropClass:'customBackdrop'
     }
 
+
   }
+  ngOnInit() {
+
+    this.subscription = this.gameService.getWinnerEmitter()
+      .subscribe(winner => {
+        console.log('winner emitted');
+        this.winner = winner;
+        this.clickBtn.nativeElement.click();
+
+      });
+  }
+
   closeResult: string;
   modalOptions:NgbModalOptions;
 
@@ -41,8 +57,8 @@ export class AppComponent {
   }
 
   open(content) {
-    console.log(content);
-    this.modalService.open('mymodal', this.modalOptions).result.then((result) => {
+    this.winner = '@deewhyweb';
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       console.log(reason);
