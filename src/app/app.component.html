@@ -23,16 +23,16 @@
         class="nav-item"
         [class.active]="router.url === '/page1' || router.url === '/core-sub'"
       >
-        <a class="nav-link" (click)="coreEngine()">Core engine</a>
+        <a class="nav-link" (click)="coreEngine()">Impact Mapping</a>
       </li>
       <li class="nav-item" [class.active]="router.url === '/page2'">
-        <a class="nav-link" (click)="twitter()">Twitter engine</a>
+        <a class="nav-link" (click)="twitter()">DDD and EDA</a>
       </li>
       <li class="nav-item" [class.active]="router.url === '/page3'">
-        <a class="nav-link" (click)="cqrs()">CQRS</a>
+        <a class="nav-link" (click)="cqrs()">Hexagonal architecture</a>
       </li>
       <li class="nav-item" [class.active]="router.url === '/page4'">
-        <a class="nav-link" (click)="api()">Kafka</a>
+        <a class="nav-link" (click)="api()">REST and Streams</a>
       </li>
     </ul>
   </div>
