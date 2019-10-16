@@ -21,7 +21,7 @@ export class GameService {
   startGame() {
     this.entries = 0;
     this.http
-      .post(this.baseUrl + "/api/event/game/start", {})
+      .get(this.baseUrl + "/api/event/game/start")
       .subscribe(res => {
         console.log(res);
         this.gameInProgress = true;
@@ -69,7 +69,7 @@ export class GameService {
   startRound() {
     return new Promise((resolve, reject) => {
       this.http
-        .post(this.baseUrl + "/api/event/round/start", {})
+        .get(this.baseUrl + "/api/event/round/start")
         .subscribe((res: any) => {
           console.log("Rounds started");
           resolve();
