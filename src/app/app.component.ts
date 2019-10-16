@@ -14,6 +14,10 @@ export class AppComponent {
   clickBtn: ElementRef;
   winner: string;
   subscription: any;
+  closeResult: string;
+  modalOptions: NgbModalOptions;
+  title = 'newapp';
+
   constructor(public gameService: GameService, public router: Router, private modalService: NgbModal) {
     this.modalOptions = {
       backdrop:'static',
@@ -33,10 +37,7 @@ export class AppComponent {
       });
   }
 
-  closeResult: string;
-  modalOptions:NgbModalOptions;
 
-  title = "newapp";
   home() {
     this.router.navigate(["/home"]);
   }

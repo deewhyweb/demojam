@@ -86,17 +86,21 @@
 <button style="display:none" #clickBtn class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Winner chosen</h4>
+    <h4 class="modal-title" id="modal-basic-title">We have a winner!!!</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    The winner is {{winner}}
+    This rounds winner is {{winner}}
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
   </div>
 </ng-template>
+<footer class="footer">
+  <img src="../assets/red-hat-logo.png" height="50"> Red Hat DemoJam Tech Exchange North America 2019
+  <div style="float: right; padding-right:10px">Shakespeare Schwarzenegger Hamilton</div>
+</footer>
 
 
