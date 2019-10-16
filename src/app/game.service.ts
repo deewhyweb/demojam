@@ -49,7 +49,7 @@ export class GameService {
             console.log('Rounds started');
           });
         });
-      }, 10000);
+      }, 120000);
     });
   }
 
