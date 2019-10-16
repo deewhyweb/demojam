@@ -41,6 +41,14 @@ export class GameService {
     this.roundsInProgress = true;
     this.http.post(this.baseUrl + '/api/event/round/start',{}).subscribe((res: any) => {
       console.log('Rounds started');
+      setTimeout(() => {
+        this.http.post(this.baseUrl + '/api/event/round/end',{}).subscribe((res: any) => {
+          console.log('Rounds Finished');
+          this.http.post(this.baseUrl + '/api/event/round/start',{}).subscribe((res: any) => {
+            console.log('Rounds started');
+          });
+        });
+      }, 10000);
     });
   }
 
