@@ -36,7 +36,24 @@
     <div class="card">
       <div class="card-body" *ngIf="gameService.gameInProgress">
         <p>Game is in progress, start new rounds with the button below.</p>
-
+        <div class="row">
+        <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">Round duration</span>
+            </div>
+            <input type="number" width="5" [(ngModel)]="duration" class="form-control">
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="">Number of rounds</span>
+              </div>
+              <input type="number" width="5" [(ngModel)]="numRounds" class="form-control">
+            </div>
+          </div>
+        </div>
         <br>
         <button type="button" class="btn btn-primary btn-lg" [disabled]="gameService.roundsInProgress"  (click)="startRound()">Start Rounds</button>
       </div>

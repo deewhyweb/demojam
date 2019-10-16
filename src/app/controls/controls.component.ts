@@ -12,7 +12,8 @@ export class ControlsComponent implements OnInit {
   roundInProgress = false;
   gameId = "";
   progressVal = 0;
-  duration = 30;
+  duration = 120;
+  numRounds = 2;
   progressStyle = 'width: 0%';
   roundComplete = false;
   constructor(public router: Router, public gameService: GameService) { }
@@ -32,7 +33,7 @@ export class ControlsComponent implements OnInit {
 
   }
   startRound() {
-    this.gameService.startRounds();
+    this.gameService.startRounds(this.duration, this.numRounds);
 
   }
 
