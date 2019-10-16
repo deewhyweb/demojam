@@ -23,6 +23,7 @@ export class GameService {
     this.http.post(this.baseUrl + '/api/event/game/start', {}).subscribe(res => {
       console.log(res);
       this.gameInProgress = true;
+      this.connect();
     });
     // setTimeout(() => {
     //   this.winnerAlert.emit('@deewhyweb');
@@ -37,7 +38,7 @@ export class GameService {
     this.socket.close();
   }
   startRounds() {
-    this.connect();
+
     this.roundsInProgress = true;
     this.http.post(this.baseUrl + '/api/event/round/start',{}).subscribe((res: any) => {
       console.log('Rounds started');
