@@ -27,7 +27,7 @@ export class AppComponent {
 
   }
   ngOnInit() {
-
+    this.gameService.startTimer();
     this.subscription = this.gameService.getWinnerEmitter()
       .subscribe(winner => {
         console.log('winner emitted');

@@ -13,11 +13,34 @@ export class GameService {
   entries = 0;
   round = 0;
   latestEntry = "";
+  remaining = "";
   baseUrl = "http://localhost:8091";
   constructor(private http: HttpClient) {}
   getWinnerEmitter() {
     return this.winnerAlert;
   }
+  startTimer() {
+    console.log('timer')
+    var duration = 60*8
+    var timer = duration
+    var minutes
+    var seconds;
+
+    setInterval(() => {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        this.remaining = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
   startGame() {
     this.entries = 0;
     this.http

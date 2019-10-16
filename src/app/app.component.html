@@ -80,7 +80,11 @@
             <b>Latest participant:</b> {{ gameService.latestEntry }}
           </h6>
         </div>
+        <div>
+            Time remaining {{ gameService.remaining }}
+        </div>
     </div>
+
   </div>
 </div>
 <button style="display:none" #clickBtn class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
