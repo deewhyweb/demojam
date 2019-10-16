@@ -32,7 +32,7 @@ export class ControlsComponent implements OnInit {
 
   }
   startRound() {
-    this.gameService.startRounds(this.duration);
+    this.gameService.startRounds();
 
   }
 

@@ -39,7 +39,7 @@ export class GameService {
   startRounds() {
     this.connect();
     this.roundsInProgress = true;
-    this.http.get(this.baseUrl + '/api/rounds').subscribe((res: any) => {
+    this.http.post(this.baseUrl + '/api/event/round/start',{}).subscribe((res: any) => {
       console.log('Rounds started');
     });
   }
@@ -54,9 +54,9 @@ export class GameService {
 
     this.socket.onmessage = event => {
       console.log(event);
-      if (event && event.data && event.data.eventType) {
-        switch (event.data.eventType) {
-          case 'RoundStartedEvent':
+      if (event && event.data && event.data) {
+        switch (event.data) {
+          case 'Round Started!':
             this.startRound();
             break;
           case 'RoundEndedEvent':
