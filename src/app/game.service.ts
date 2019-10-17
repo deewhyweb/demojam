@@ -1,22 +1,22 @@
-import { EventEmitter } from "@angular/core";
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class GameService {
   winnerAlert: EventEmitter<string> = new EventEmitter();
   private socket;
   gameInProgress = false;
   roundsInProgress = false;
-  quote = "";
+  quote = '';
   entries = 0;
   round = 0;
-  latestEntry = "";
-  remaining = "";
+  latestEntry = '';
+  remaining = '';
   numRounds;
   roundCount;
-  baseUrl = "http://localhost:8091";
+  baseUrl = 'http://localhost:8091';
   constructor(private http: HttpClient) {}
   getWinnerEmitter() {
     return this.winnerAlert;
@@ -34,10 +34,10 @@ export class GameService {
         minutes = parseInt(var1.toString(), 10)
         seconds = parseInt(var2.toString(), 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
 
-        this.remaining = minutes + ":" + seconds;
+        this.remaining = minutes + ':' + seconds;
 
         if (--timer < 0) {
             this.remaining = 'Time over!!!';
@@ -48,7 +48,7 @@ export class GameService {
   startGame() {
     this.entries = 0;
     this.http
-      .get(this.baseUrl + "/api/event/game/start")
+      .get(this.baseUrl + '/api/event/game/start')
       .subscribe(res => {
         console.log(res);
         this.gameInProgress = true;
@@ -63,21 +63,23 @@ export class GameService {
     this.gameInProgress = false;
     this.roundsInProgress = false;
     this.round = 0;
-    this.quote = "";
+    this.quote = '';
     this.socket.close();
   }
   startRounds(duration, numRounds) {
     this.numRounds = numRounds;
     this.roundCount = 1;
     this.roundsInProgress = true;
-    this.startRound()
+    this.startRound().then(() => {
+      console.log('Round started');
+    })
   }
   endRound() {
     return new Promise((resolve, reject) => {
       this.http
-        .post(this.baseUrl + "/api/event/round/end", {})
+        .post(this.baseUrl + '/api/event/round/end', {})
         .subscribe((res: any) => {
-          console.log("Round ended");
+          console.log('Round ended');
           resolve();
         });
     });
@@ -86,9 +88,9 @@ export class GameService {
   startRound() {
     return new Promise((resolve, reject) => {
       this.http
-        .get(this.baseUrl + "/api/event/round/start")
+        .get(this.baseUrl + '/api/event/round/start')
         .subscribe((res: any) => {
-          console.log("Rounds started");
+          console.log('Rounds started');
           this.startRoundEvent();
           resolve();
         });
@@ -101,30 +103,32 @@ export class GameService {
   }
   connect() {
     // this.socket = io(this.baseUrl + '/stream');
-    this.socket = new WebSocket("ws://localhost:8091/stream");
+    this.socket = new WebSocket('ws://localhost:8091/stream');
 
     this.socket.onmessage = event => {
       console.log(event);
-      if (event && event.data && event.data) {
-        switch (event.data) {
-          // case "Round Started!":
-          //   this.startRoundEvent();
-          //   break;
-          case "RoundEndedEvent":
+      var data;
+      try {
+        data = JSON.parse(event.data);
+      }
+      catch(err){
+         console.log(err);
+         return;
+      }
+      if (data && data.eventType) {
+        switch (data.eventType) {
+          case 'RoundEndedEvent':
             if (this.roundCount < this.numRounds){
               this.roundCount++;
               this.startRound();
             }
-            this.winnerAlert.emit('Winner text');
+            this.winnerAlert.emit(data.winner);
             break;
-          case "NextQuoteEvent":
-            this.quote = event.data.quote.text;
+          case 'NextQuoteEvent':
+            this.quote = data.quote.text;
             break;
-          case "GameEndedEvent":
-            this.stopGame();
-            break;
-          case "GuessReceivedEvent":
-            this.latestEntry = event.data.player;
+          case 'GuessReceivedEvent':
+            this.latestEntry = data.player;
             break;
         }
       }
