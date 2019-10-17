@@ -72,7 +72,7 @@ export class GameService {
     this.roundsInProgress = true;
     this.startRound().then(() => {
       console.log('Round started');
-    })
+    });
   }
   endRound() {
     return new Promise((resolve, reject) => {
@@ -85,7 +85,23 @@ export class GameService {
     });
   }
 
+  fakeEntries() {
+    var interval = setInterval(() => {
+      if (this.roundsInProgress) {
+        var guess = Math.floor(Math.random() * 20 + 1)
+        if (guess < 5) {
+          this.entries++;
+        }
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
   startRound() {
+    setTimeout(() => {
+      this.fakeEntries();
+    }, 10000);
     return new Promise((resolve, reject) => {
       this.http
         .get(this.baseUrl + '/api/event/round/start')
@@ -122,6 +138,8 @@ export class GameService {
             //   this.roundCount++;
             //   this.startRound();
             // }
+            this.roundsInProgress = false;
+            this.entries=0;
             this.winnerAlert.emit(data.winner);
             break;
           case 'NextQuoteEvent':
