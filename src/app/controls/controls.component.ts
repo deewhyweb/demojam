@@ -13,7 +13,7 @@ export class ControlsComponent implements OnInit {
   gameId = "";
   progressVal = 0;
   duration = 120;
-  numRounds = 2;
+  numRounds = 1;
   progressStyle = 'width: 0%';
   roundComplete = false;
   constructor(public router: Router, public gameService: GameService) { }
