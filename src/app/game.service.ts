@@ -125,7 +125,14 @@ export class GameService {
             this.winnerAlert.emit(data.winner);
             break;
           case 'NextQuoteEvent':
-            this.quote = data.quote.text;
+            var text;
+            try{
+              text = JSON.parse(data.quote.text);
+            }
+            catch(err){
+
+            }
+            this.quote = text.quote.text;
             break;
           case 'GuessReceivedEvent':
             this.latestEntry = data.player;
