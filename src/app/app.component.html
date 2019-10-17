@@ -60,9 +60,9 @@
           >
         </h6>
       </div>
-      <div  *ngIf="gameService.gameInProgress">
+      <!-- <div  *ngIf="gameService.gameInProgress">
         <h6><b>Round Number: </b> {{ gameService.round }}</h6>
-      </div>
+      </div> -->
 
       <div >
         <h6 *ngIf="gameService.gameInProgress"><b>Current Quote:</b></h6>
@@ -71,11 +71,11 @@
         <h6 *ngIf="gameService.gameInProgress && gameService.quote">"{{ gameService.quote }}"</h6>
       </div>
 
-      <div class="">
+      <!-- <div class="">
         <h6 *ngIf="gameService.gameInProgress">
           <b>Number of entries:</b> {{ gameService.entries }}
         </h6>
-      </div>
+      </div> -->
       <div class="">
           <h6 *ngIf="gameService.gameInProgress">
             <b>Latest participant:</b> {{ gameService.latestEntry }}
