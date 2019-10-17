@@ -58,7 +58,7 @@ export class AppComponent {
   }
 
   open(content) {
-    this.winner = '@deewhyweb';
+    // this.winner = '@deewhyweb';
     this.modalService.open(content, this.modalOptions).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
