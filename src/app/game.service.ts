@@ -118,10 +118,10 @@ export class GameService {
       if (data && data.eventType) {
         switch (data.eventType) {
           case 'RoundEndedEvent':
-            if (this.roundCount < this.numRounds){
-              this.roundCount++;
-              this.startRound();
-            }
+            // if (this.roundCount < this.numRounds){
+            //   this.roundCount++;
+            //   this.startRound();
+            // }
             this.winnerAlert.emit(data.winner);
             break;
           case 'NextQuoteEvent':
