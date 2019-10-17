@@ -14,6 +14,8 @@ export class GameService {
   round = 0;
   latestEntry = "";
   remaining = "";
+  numRounds;
+  roundCount;
   baseUrl = "http://localhost:8091";
   constructor(private http: HttpClient) {}
   getWinnerEmitter() {
@@ -21,7 +23,7 @@ export class GameService {
   }
   startTimer() {
     console.log('timer')
-    var duration = 60*8
+    var duration = 60*8;
     var timer = 480;
     var minutes
     var seconds;
@@ -38,7 +40,7 @@ export class GameService {
         this.remaining = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = duration;
+            this.remaining = 'Time over!!!';
         }
     }, 1000);
 }
@@ -65,20 +67,10 @@ export class GameService {
     this.socket.close();
   }
   startRounds(duration, numRounds) {
-    var roundCount = 1;
+    this.numRounds = numRounds;
+    this.roundCount = 1;
     this.roundsInProgress = true;
-    this.startRound().then(() => {
-    const interval = setInterval(() => {
-        if (roundCount < numRounds) {
-          roundCount++;
-          this.endRound().then(() => {
-            this.startRound();
-          });
-        } else {
-          clearInterval(interval);
-        }
-      }, duration * 1000);
-    });
+    this.startRound()
   }
   endRound() {
     return new Promise((resolve, reject) => {
@@ -97,6 +89,7 @@ export class GameService {
         .get(this.baseUrl + "/api/event/round/start")
         .subscribe((res: any) => {
           console.log("Rounds started");
+          this.startRoundEvent();
           resolve();
         });
     });
@@ -114,11 +107,15 @@ export class GameService {
       console.log(event);
       if (event && event.data && event.data) {
         switch (event.data) {
-          case "Round Started!":
-            this.startRoundEvent();
-            break;
+          // case "Round Started!":
+          //   this.startRoundEvent();
+          //   break;
           case "RoundEndedEvent":
-            this.winnerAlert.emit(event.data.round.winner);
+            if (this.roundCount < this.numRounds){
+              this.roundCount++;
+              this.startRound();
+            }
+            this.winnerAlert.emit('Winner text');
             break;
           case "NextQuoteEvent":
             this.quote = event.data.quote.text;
