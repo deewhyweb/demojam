@@ -16,7 +16,7 @@ export class Page4Component implements OnInit {
 
 
   nextPage() {
-    this.router.navigate(['/controls']);
+    this.router.navigate(['/core-sub']);
   }
 
 

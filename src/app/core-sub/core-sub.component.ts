@@ -13,6 +13,6 @@ export class CoreSubComponent implements OnInit {
   ngOnInit() {
   }
   nextPage() {
-    this.router.navigate(['/page2']);
+    this.router.navigate(['/controls']);
   }
 }

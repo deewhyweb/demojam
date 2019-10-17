@@ -56,6 +56,9 @@ export class AppComponent {
   api() {
     this.router.navigate(["/page4"]);
   }
+  coreSub() {
+    this.router.navigate(["/core-sub"]);
+  }
 
   open(content) {
     // this.winner = '@deewhyweb';

@@ -34,6 +34,9 @@
       <li class="nav-item" [class.active]="router.url === '/page4'">
         <a class="nav-link" (click)="api()">REST and Streams</a>
       </li>
+      <li class="nav-item" [class.active]="router.url === '/core-sub'">
+        <a class="nav-link" (click)="coreSub()">Summary</a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -104,7 +107,8 @@
   </div>
 </ng-template>
 <footer class="footer">
-  <img src="../assets/red-hat-logo.png" height="50"> Red Hat DemoJam Tech Exchange North America 2019
+  <img src="../assets/red-hat-logo.png" height="50"> DemoJam Tech Exchange North America 2019 <div style="float:right; padding-right:10px">Shakespeare, Schwarzenegger and Hamilton
+      or... Supersonic, Reactive Java Microservices (with Twitter)</div>
 </footer>
 
 
