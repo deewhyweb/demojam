@@ -21,24 +21,24 @@ export class GameService {
   }
   startTimer() {
     console.log('timer')
-    var duration = 60*8
-    var timer = duration
-    var minutes
-    var seconds;
+    // var duration = 60*8
+    // var timer: string = '480';
+    // var minutes
+    // var seconds;
 
-    setInterval(() => {
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
+    // setInterval(() => {
+    //     minutes = parseInt(timer / 60, 10)
+    //     seconds = parseInt(timer % 60, 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
+    //     minutes = minutes < 10 ? "0" + minutes : minutes;
+    //     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        this.remaining = minutes + ":" + seconds;
+    //     this.remaining = minutes + ":" + seconds;
 
-        if (--timer < 0) {
-            timer = duration;
-        }
-    }, 1000);
+    //     if (--timer < 0) {
+    //         timer = duration;
+    //     }
+    // }, 1000);
 }
 
   startGame() {
