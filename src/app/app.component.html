@@ -76,13 +76,13 @@
           <b>Number of entries:</b> {{ gameService.entries }}
         </h6>
       </div> -->
-      <div class="">
+      <!-- <div class="">
           <h6 *ngIf="gameService.gameInProgress">
             <b>Latest participant:</b> {{ gameService.latestEntry }}
           </h6>
-        </div>
+        </div> -->
         <div>
-            Time remaining {{ gameService.remaining }}
+            Time remaining <b>{{ gameService.remaining }}</b>
         </div>
     </div>
 
